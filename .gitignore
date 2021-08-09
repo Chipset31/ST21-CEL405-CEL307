@@ -1,0 +1,7 @@
+.metadata/
+RemoteSystemsTempFiles/
+*/Debug/
+*/Release/
+*/.settings/
+*/*.launch
+L476RG-ECU/.settings/language.settings.xml
