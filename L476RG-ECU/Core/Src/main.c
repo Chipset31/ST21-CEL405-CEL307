@@ -92,7 +92,7 @@ static void ProcessReceivedTransfer(CanardState* const state, const CanardTransf
 			uavcan_si_sample_temperature_Scalar_1_0 temperature = {0};
 			if (uavcan_si_sample_temperature_Scalar_1_0_deserialize_(&temperature, transfer->payload, &size) >= 0)
 			{
-				SDLogSampleScalar(transfer, uavcan_si_sample_temperature_Scalar_1_0_FULL_NAME_, temperature.kelvin, temperature.timestamp.microsecond);
+				SDLogSampleScalarToCSV(transfer, uavcan_si_sample_temperature_Scalar_1_0_FULL_NAME_, temperature.kelvin, temperature.timestamp.microsecond);
 			}
 		}
 		else if( transfer->port_id == uavcan_si_sample_pressure_Scalar_1_0_PORT_ID)
@@ -100,7 +100,7 @@ static void ProcessReceivedTransfer(CanardState* const state, const CanardTransf
 			uavcan_si_sample_pressure_Scalar_1_0 pressure = {0};
 			if (uavcan_si_sample_pressure_Scalar_1_0_deserialize_(&pressure, transfer->payload, &size) >= 0)
 			{
-				SDLogSampleScalar(transfer, uavcan_si_sample_pressure_Scalar_1_0_FULL_NAME_, pressure.pascal, pressure.timestamp.microsecond);
+				SDLogSampleScalarToCSV(transfer, uavcan_si_sample_pressure_Scalar_1_0_FULL_NAME_, pressure.pascal, pressure.timestamp.microsecond);
 			}
 		}
 		else

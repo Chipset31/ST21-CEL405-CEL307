@@ -76,7 +76,7 @@ int8_t uavcanInit(CanardState* const state, uint8_t nodeId, uint32_t bitrate)
 	// - https://github.com/UAVCAN/libcanard/blob/master/README.md
 	// - https://github.com/pavel-kirienko/o1heap/blob/master/README.md
 	// - https://forum.uavcan.org/t/uavcanv1-libcanard-nunavut-templates-memory-usage-concerns/1118/4?u=pavel.kirienko
-	_Alignas(O1HEAP_ALIGNMENT) static uint8_t heap_arena[1024 * 4] = {0};
+	_Alignas(O1HEAP_ALIGNMENT) static uint8_t heap_arena[1024 * 8] = {0};
 
 	// If you are using an RTOS or another multithreaded environment, pass critical section enter/leave functions
 	// in the last two arguments instead of NULL.

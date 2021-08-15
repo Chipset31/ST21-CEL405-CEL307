@@ -27,6 +27,7 @@ FRESULT SDLogInit(const char* drivePath);
 FRESULT SDLogDeInit(void);
 FRESULT SDLogWrite(const char* message);
 FRESULT SDLogSampleScalar(const CanardTransfer* const transfer, const TCHAR* name, float value, uint64_t timestamp);
+FRESULT SDLogSampleScalarToCSV(const CanardTransfer* const transfer, const TCHAR* name, float value, uint64_t timestamp);
 
 
 

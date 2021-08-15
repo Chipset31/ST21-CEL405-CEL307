@@ -117,7 +117,7 @@ FRESULT SDLogSampleScalar(const CanardTransfer* const transfer, const TCHAR* nam
 	TCHAR filename[8] = {0};
 
 	//Log each node ID to a separate file
-	sprintf(&filename,"%u.txt", (uint32_t)transfer->remote_node_id);
+	sprintf(filename,"%u.txt", (uint16_t)transfer->remote_node_id);
 
 	res = f_open(&log, filename, FA_OPEN_APPEND | FA_WRITE);
 	if(res != FR_OK)
@@ -140,4 +140,33 @@ FRESULT SDLogSampleScalar(const CanardTransfer* const transfer, const TCHAR* nam
 	return res;
 }
 
+FRESULT SDLogSampleScalarToCSV(const CanardTransfer* const transfer, const TCHAR* name, float value, uint64_t timestamp)
+{
+	FRESULT res = FR_INVALID_PARAMETER;
+	FIL log;
+	TCHAR filename[9] = {0};
+
+	//Log each node ID to a separate file
+	sprintf(filename,"%u.txt", transfer->port_id);
+
+	res = f_open(&log, filename, FA_OPEN_APPEND | FA_WRITE);
+	if(res != FR_OK)
+	{
+		return res;
+	}
+
+	//The f_printf implementation in FatFs doesn't support printing floats ("%f"), so we use sprintf first.
+	TCHAR valueString[50] = {0};
+	sprintf(valueString, "%f", value);
+
+	f_printf(&log, "%lu,", (uint64_t)transfer->timestamp_usec);
+
+		f_printf(&log, "%u,%u,%u,",
+				(uint32_t)transfer->remote_node_id, (uint32_t)transfer->port_id, (uint32_t)transfer->transfer_id);
+
+		f_printf(&log, "%s,%s,%lu\n", name, valueString, timestamp);
+
+	res = f_close(&log);
+	return res;
+}
 

@@ -92,7 +92,7 @@ void Blink(void);
 /* USER CODE BEGIN Private defines */
 
 #define CAN_NODE_ID 10U
-#define CAN_BITRATE 100000U
+#define CAN_BITRATE 500000U
 
 /* USER CODE END Private defines */
 
